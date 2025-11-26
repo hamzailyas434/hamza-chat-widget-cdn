@@ -176,6 +176,40 @@
         }
         .chat-assist-widget .submit-registration:hover { transform: translateY(-2px); box-shadow: var(--chat-shadow-lg); }
         .chat-assist-widget .submit-registration:disabled { opacity:.7; cursor:not-allowed; transform:none; }
+
+        /* Suggested Reply Buttons */
+        .chat-assist-widget .suggested-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+            align-self: flex-start;
+            max-width: 90%;
+        }
+        .chat-assist-widget .suggested-reply-btn {
+            padding: 10px 16px;
+            background: white;
+            color: var(--chat-color-primary);
+            border: 1.5px solid var(--chat-color-primary);
+            border-radius: var(--chat-radius-md);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            font-family: inherit;
+            transition: var(--chat-transition);
+            box-shadow: var(--chat-shadow-sm);
+            text-align: left;
+            line-height: 1.4;
+        }
+        .chat-assist-widget .suggested-reply-btn:hover {
+            background: var(--chat-color-primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--chat-shadow-md);
+        }
+        .chat-assist-widget .suggested-reply-btn:active {
+            transform: translateY(0);
+        }
     `;
     document.head.appendChild(widgetStyles);
 
@@ -340,6 +374,59 @@
         return text.replace(urlPattern, (url) => `<a href="${url}" target="_blank" rel="noopener noreferrer" class="chat-link">${url}</a>`);
     }
 
+    // Parse [BUTTONS]...[/BUTTONS] format from n8n response
+    function parseButtonsFromText(text) {
+        const buttonRegex = /\[BUTTONS\]([\s\S]*?)\[\/BUTTONS\]/gi;
+        const matches = [];
+        let cleanText = text;
+        let match;
+
+        while ((match = buttonRegex.exec(text)) !== null) {
+            const buttonContent = match[1].trim();
+            // Split by newlines and filter out empty lines
+            const buttons = buttonContent
+                .split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0)
+                .map(line => {
+                    // Remove bullet points (•, -, *, etc.) and leading/trailing whitespace
+                    return line.replace(/^[•\-\*⁠\s]+/, '').trim();
+                })
+                .filter(line => line.length > 0);
+            
+            matches.push(buttons);
+        }
+
+        // Remove [BUTTONS]...[/BUTTONS] blocks from text
+        cleanText = cleanText.replace(buttonRegex, '').trim();
+
+        return {
+            cleanText,
+            buttonGroups: matches
+        };
+    }
+
+    // Create suggested reply buttons
+    function createSuggestedReplies(buttons) {
+        if (!Array.isArray(buttons) || buttons.length === 0) return null;
+
+        const container = document.createElement('div');
+        container.className = 'suggested-replies';
+
+        buttons.forEach(buttonText => {
+            const button = document.createElement('button');
+            button.className = 'suggested-reply-btn';
+            button.textContent = buttonText;
+            button.addEventListener('click', () => {
+                submitMessage(buttonText);
+                container.remove(); // Remove buttons after click
+            });
+            container.appendChild(button);
+        });
+
+        return container;
+    }
+
     function showRegistrationForm(){
         chatWelcome.style.display = 'none';
         userRegistration.classList.add('active');
@@ -431,11 +518,24 @@
 
             messagesContainer.removeChild(typing);
 
+            // Parse response for buttons
+            const messageText = Array.isArray(d2) ? d2[0]?.output || '' : d2?.output || '';
+            const { cleanText, buttonGroups } = parseButtonsFromText(messageText);
+
             const botMessage = document.createElement('div');
             botMessage.className = 'chat-bubble bot-bubble';
-            const messageText = Array.isArray(d2) ? d2[0]?.output || '' : d2?.output || '';
-            botMessage.innerHTML = linkifyText(messageText || AUTO_GREETING);
+            botMessage.innerHTML = linkifyText(cleanText || AUTO_GREETING);
             messagesContainer.appendChild(botMessage);
+
+            // Add buttons if found
+            if (buttonGroups.length > 0) {
+                buttonGroups.forEach(buttons => {
+                    const repliesContainer = createSuggestedReplies(buttons);
+                    if (repliesContainer) {
+                        messagesContainer.appendChild(repliesContainer);
+                    }
+                });
+            }
 
             // Suggested questions (if any)
             if (Array.isArray(settings.suggestedQuestions) && settings.suggestedQuestions.length){
@@ -498,11 +598,25 @@
 
             if (typing && typing.parentNode) messagesContainer.removeChild(typing);
 
+            // Parse response for buttons
+            const responseText = Array.isArray(data) ? (data[0]?.output || '') : (data?.output || '');
+            const { cleanText, buttonGroups } = parseButtonsFromText(responseText);
+
             const botMessage = document.createElement('div');
             botMessage.className = 'chat-bubble bot-bubble';
-            const responseText = Array.isArray(data) ? (data[0]?.output || '') : (data?.output || '');
-            botMessage.innerHTML = linkifyText(responseText || "...");
+            botMessage.innerHTML = linkifyText(cleanText || "...");
             messagesContainer.appendChild(botMessage);
+
+            // Add buttons if found
+            if (buttonGroups.length > 0) {
+                buttonGroups.forEach(buttons => {
+                    const repliesContainer = createSuggestedReplies(buttons);
+                    if (repliesContainer) {
+                        messagesContainer.appendChild(repliesContainer);
+                    }
+                });
+            }
+
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
         }catch(err){
