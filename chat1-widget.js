@@ -181,19 +181,19 @@
         .chat-assist-widget .suggested-replies {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             margin-top: 8px;
             align-self: flex-start;
             max-width: 90%;
         }
         .chat-assist-widget .suggested-reply-btn {
-            padding: 10px 16px;
+            padding: 8px 12px;
             background: white;
             color: var(--chat-color-primary);
             border: 1.5px solid var(--chat-color-primary);
             border-radius: var(--chat-radius-md);
             cursor: pointer;
-            font-size: 13px;
+            font-size: 10px;
             font-weight: 500;
             font-family: inherit;
             transition: var(--chat-transition);
