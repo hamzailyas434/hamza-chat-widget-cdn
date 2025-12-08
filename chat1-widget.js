@@ -187,7 +187,7 @@
             max-width: 90%;
         }
         .chat-assist-widget .suggested-reply-btn {
-            padding: 10px 16px;
+            padding: 8px 16px;
             background: white;
             color: var(--chat-color-primary);
             border: 1.5px solid var(--chat-color-primary);
