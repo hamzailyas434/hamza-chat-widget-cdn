@@ -332,7 +332,7 @@
     const chatInterfaceHTML = `
         <div class="chat-body">
             <div class="chat-messages"></div>
-            <div class="chat-controls">
+<div class="chat-controls">
 
               <label class="chat-upload-btn" style="cursor:pointer; font-size:20px; padding:0 8px; display:flex; align-items:center;">
     <span style="font-size:22px;">📎</span>
