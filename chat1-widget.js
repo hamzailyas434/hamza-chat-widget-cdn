@@ -312,7 +312,10 @@
             <div class="chat-messages"></div>
             <div class="chat-controls">
                 <textarea class="chat-textarea" placeholder="Type your message here..." rows="1"></textarea>
-                <button class="chat-submit" aria-label="Send message">
+                <label class="chat-upload-btn">
+    <input type="file" class="chat-file-input" style="display:none">
+</label>
+            <button class="chat-submit" aria-label="Send message">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
