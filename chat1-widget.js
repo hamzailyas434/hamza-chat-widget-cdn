@@ -44,20 +44,22 @@
              }
 
           .chat-upload-btn {
-          display: inline-flex !important;
-          align-items: center !important;
-          justify-content: center !important;
-          color: #000 !important;
-          width: 28px !important;
-          height: 28px !important;
-          }
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    cursor: pointer !important;
+}
 
-          .chat-upload-btn span {
-          display: inline-block !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          color: #000 !important;
-          }
+.chat-upload-btn span {
+    font-size: 22px !important;
+    color: #1D2959 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
 
 
         .chat-assist-widget .chat-window {
