@@ -37,17 +37,27 @@
             --chat-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'Poppins', sans-serif;
         }
-        .chat-controls {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    gap: 6px !important;
-}
+         .chat-controls {
+           display: flex !important;
+           align-items: center !important;
+           gap: 10px !important;
+             }
 
-.chat-upload-btn {
-    display: flex !important;
-    align-items: center !important;
-}
+          .chat-upload-btn {
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          color: #000 !important;
+          width: 28px !important;
+          height: 28px !important;
+          }
+
+          .chat-upload-btn span {
+          display: inline-block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+          color: #000 !important;
+          }
 
 
         .chat-assist-widget .chat-window {
