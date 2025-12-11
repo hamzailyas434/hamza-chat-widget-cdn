@@ -37,6 +37,18 @@
             --chat-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: 'Poppins', sans-serif;
         }
+        .chat-controls {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.chat-upload-btn {
+    display: flex !important;
+    align-items: center !important;
+}
+
 
         .chat-assist-widget .chat-window {
             position: fixed;
