@@ -311,11 +311,11 @@
         <div class="chat-body">
             <div class="chat-messages"></div>
             <div class="chat-controls">
-    
-    <label class="chat-upload-btn" style="cursor:pointer; font-size:20px;">
+
+              <label class="chat-upload-btn" style="cursor:pointer; font-size:20px; padding:0 8px; display:flex; align-items:center;">
         📎
         <input type="file" class="chat-file-input" style="display:none">
-    </label>
+           </label>
 
     <textarea class="chat-textarea" placeholder="Type your message here..." rows="1"></textarea>
 
@@ -327,6 +327,8 @@
             <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
         </svg>
     </button>
+
+</div>
 
 </div>
             <div class="chat-footer">
