@@ -313,9 +313,9 @@
             <div class="chat-controls">
 
               <label class="chat-upload-btn" style="cursor:pointer; font-size:20px; padding:0 8px; display:flex; align-items:center;">
-        📎
-        <input type="file" class="chat-file-input" style="display:none">
-           </label>
+    <span style="font-size:22px;">📎</span>
+    <input type="file" class="chat-file-input" style="display:none">
+</label>
 
     <textarea class="chat-textarea" placeholder="Type your message here..." rows="1"></textarea>
 
