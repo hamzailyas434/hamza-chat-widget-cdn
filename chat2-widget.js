@@ -12,7 +12,7 @@
         logo: userConfig.branding?.logo || "",
         companyName: userConfig.branding?.name || "Adan Construction",
         // We use the greeting with buttons by default, unless overriden
-        greeting: "Hello! How can I help you today?\n\n[BUTTONS]\nStart Project\nContact Support\n[/BUTTONS]",
+        greeting: "Hello! How can I help you today?",
         poweredByText: userConfig.branding?.poweredBy?.text || "Powered by Adan Construction",
         poweredByLink: userConfig.branding?.poweredBy?.link || "#"
     };
