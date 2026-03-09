@@ -7,7 +7,7 @@
 
     // ==== SETTINGS (toggle) ====
     const PRECHAT_ENABLED = false; // ⛔ false => name/email never asked
-    const AUTO_GREETING = "Hello! Adan Construction AI Agent — how can I help you today?";
+    const AUTO_GREETING = "Hello! Pasadena Mulch AI Agent — how can I help you today?";
 
     // Load font resource - using Poppins for a fresh look
     const fontElement = document.createElement('link');
