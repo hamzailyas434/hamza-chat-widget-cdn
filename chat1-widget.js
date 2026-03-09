@@ -1,5 +1,5 @@
 // Interactive Chat Widget for n8n (DIRECT-START VERSION, PRE-CHAT BYPASSED)
-// Changes: 1) No name/email  2) Auto greeting  3) "Powered by Adan Construction"
+// Changes: 1) No name/email  2) Auto greeting  3) "Powered by Pasadena Mulch"
 (function() {
     // Initialize widget only once
     if (window.N8nChatWidgetLoaded) return;
@@ -218,17 +218,17 @@
         webhook: { url: '', route: '' },
         branding: {
             logo: '',
-            name: 'Adan Construction',
+            name: 'Pasadena Mulch',
             welcomeText: 'We’re here to help!',
             responseTimeText: 'Typically replies in a few minutes',
             poweredBy: {
-                text: 'Powered by Adan Construction',
-                link: 'https://www.adanconstruction.net/'
+                text: 'Powered by Pasadena Mulch',
+                link: 'https://mediumseagreen-oyster-953541.hostingersite.com/'
             }
         },
         style: {
-            primaryColor: '#10b981',
-            secondaryColor: '#059669',
+            primaryColor: ''#198A42',
+            secondaryColor: ''#198A42',
             position: 'right',
             backgroundColor: '#ffffff',
             fontColor: '#1f2937'
